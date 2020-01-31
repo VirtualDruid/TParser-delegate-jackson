@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -40,6 +41,10 @@ public class JacksonDelegate implements JsonDelegate<ObjectNode, ArrayNode> {
         }
         if (value instanceof Double) {
             objectNode.put(key, (Double) value);
+            return;
+        }
+        if (value instanceof JsonNode) {
+            objectNode.set(key, (JsonNode) value);
             return;
         }
         if (value instanceof Boolean) {
